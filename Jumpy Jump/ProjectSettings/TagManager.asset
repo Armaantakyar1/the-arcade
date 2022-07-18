@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Position Point
+  - Breaking Ground
   layers:
   - Default
   - TransparentFX

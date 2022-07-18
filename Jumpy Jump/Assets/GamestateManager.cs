@@ -8,6 +8,8 @@ public class GamestateManager : MonoBehaviour
     public Gamestate gamestate;
     public GameObject GameOverCanvas;
     public GameObject StartCanvas;
+    public GameObject WinningCanvass;
+    public GameObject NextButton;
 
 
 
@@ -15,13 +17,14 @@ public class GamestateManager : MonoBehaviour
     {
         Start,
         Current,
-        GameOver
+        GameOver,
+        Win
     }
 
     void Start()
     {
         StartGame();
-        
+        WinningCanvass.SetActive(false);
     }
 
    public void Gameover()
@@ -29,7 +32,9 @@ public class GamestateManager : MonoBehaviour
         gamestate = Gamestate.GameOver;
         GameOverCanvas.SetActive(true);
         StartCanvas.SetActive(false);
+        WinningCanvass.SetActive(false);
         Time.timeScale = 0;
+
 
     }
 
@@ -38,18 +43,31 @@ public class GamestateManager : MonoBehaviour
         gamestate = Gamestate.Start;
         GameOverCanvas.SetActive(false);
         StartCanvas.SetActive(true);
+        WinningCanvass.SetActive(false);
+        NextButton.SetActive(false);
         Time.timeScale = 0;
     }
 
     public void Current()
     {
+        gamestate = Gamestate.Current;
         Time.timeScale = 1;
-        StartCanvas.SetActive(false);
+       StartCanvas.SetActive(false);
+        //NextButton.SetActive(false);
+        //WinningCanvass.SetActive(false);
+    }
+    
+    public void Win()
+    {
+        gamestate = Gamestate.Win;
+        WinningCanvass.SetActive(true);
+        NextButton.SetActive(true);
+        Time.timeScale = 1;
+
     }
 
-    void Update()
+    public void ButtonMoveScene (string level)
     {
-
-
+        SceneManager.LoadScene(level);
     }
 }

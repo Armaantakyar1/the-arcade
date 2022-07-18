@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public GamestateManager manager;
     public GameObject LeftBorder;
     public GameObject RightBorder;
+    public GameObject Winningobject;
 
 
     
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
         jumping = false;
         rb = this.GetComponent<Rigidbody2D>();
         manager = GetComponent<GamestateManager>();
+        
     }
 
     // Update is called once per frame
@@ -34,24 +36,34 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        MovingRight();
+        MovingLeft();
 
 
+    }
+    public void MovingRight()
+    {
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += new Vector3(1, 0,0) * Time.deltaTime *speed ;
+            transform.position += new Vector3(1, 0, 0) * Time.deltaTime * speed;
             manager.Current();
         }
-        else if (Input.GetKey(KeyCode.A))
+    }
+
+
+    public void MovingLeft()
+    {
+        if (Input.GetKey(KeyCode.A))
         {
             transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * speed;
             manager.Current();
         }
     }
 
-    //if player collides with left broder, he'll teleport to the right border vice verca.
-    //delay time for teleportation so it doesn't keep teleporting back and forth
+//if player collides with left broder, he'll teleport to the right border vice verca.
+//delay time for teleportation so it doesn't keep teleporting back and forth
 
-    private void OnCollisionEnter2D(Collision2D other)
+private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject== LeftBorder)
         {
@@ -66,6 +78,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject == Winningobject)
+        {
+            Debug.Log("collidedWIN");
+            manager.Win();
+        }
+    }
 
 
 }

@@ -17,7 +17,7 @@ public class GameoverCheck : MonoBehaviour
     {
         if (collision.gameObject.tag=="Player")
         {
-            Debug.Log("Game Over@");
+            Debug.Log("Game Over");
             manager.Gameover();
         }
     }

@@ -5,23 +5,24 @@ using UnityEngine;
 public class Destroyer : MonoBehaviour
 {
     public Transform player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
             Destroy(collision.gameObject);
         }
-    }
-    
-   
-    // Update is called once per frame
-    void Update()
-    {
 
+        if (collision.gameObject.tag == "Position Point")
+        {
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Breaking Ground")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }
+    
+   
+   

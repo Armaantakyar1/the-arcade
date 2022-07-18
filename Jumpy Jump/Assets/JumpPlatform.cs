@@ -7,20 +7,12 @@ public class JumpPlatform : MonoBehaviour
     public float jumpValue;
     public Sprite JumpyJumping;
     public Sprite JumpyNormal;
-    public GameObject player;
+      public GameObject player;
     public float Jumptimer;
     public SpriteRenderer spriteRenderer;
+
     //give the player a boost (add force the player)
     //check if player collides with the platform
-
-
-
-
-
-    private void Start()
-    {
-
-    }
 
 
 
@@ -32,35 +24,25 @@ public class JumpPlatform : MonoBehaviour
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * jumpValue);
             Debug.Log("Hi!");
             player.GetComponent<SpriteRenderer>().sprite = JumpyJumping;
-            
+            Invoke(nameof(ChangingBacktoDefault), 0.2f);
+
 
         }
 
+        
     }
 
-    private void FixedUpdate()
+
+    //I need to make a platform move a certain distance to the right then to the left
+
+    public void ChangingBacktoDefault()
     {
-        StartCoroutine(ChangeSprite(1));
-
-        IEnumerator ChangeSprite(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            //spriteRenderer.sprite = JumpyNormal;
-        }
-        //player.GetComponent<SpriteRenderer>().sprite = JumpyNormal;
-
+        player.GetComponent<SpriteRenderer>().sprite = JumpyNormal;
     }
 
 }
 
-        /*if (Jumptimer > 0)
-        {
-            Jumptimer -= Time.deltaTime;
-            if (Jumptimer <= 0)
-            {
-                resetSprite();
-            }
-        }*/
+        
 
         
 
